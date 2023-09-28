@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;600&display=swap');
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    #root {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      position: relative;
+    }
+
+    ul{
+      width: 60vw;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 5px;
+      margin: 2vw;
+    }
+
+    #root>div:nth-child(2){
+      width: 0.5vw;
+      height: 95vh;
+      background-color: #fab8b1;
+      margin: 2vw;
+    }
+
+    #root>div:nth-child(3){
+      width: 30vw;
+      height:90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    #root>div:nth-child(3)>p{
+      font-size: 3rem;
+      text-align: center;
+      font-weight:800;
+      color : #fbc6c0;
+    }
+
+    #money{
+      width: 20vw;
+      height: 5vh;
+      margin: 5vw;
+      font-size: 1.5rem;
+      background-color: #f9e7e5af;
+      border: 0;
+    }
+
+    #submit{
+      width: 12vw;
+      height: 12vw;
+      background-color: #FFE4E1;
+      border-radius:60%;
+      border: 0;
+      font-size: 2rem;
+      color: gray;
+    }
+
+    #root > ul > li > div:nth-child(1){
+      width: 7.5vw;
+      height: 20vh;
+      background-size:contain;
+      background-repeat: no-repeat;
+      color: transparent;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <ul></ul>
+    <div></div>
+    <div>
+      <p>LYA <br> MOVIE <br> RENT SERVICE</p>
+      <input type="number" id="money" value="" placeholder="Pay For Rent" autofocus>
+      <input type="button" id="submit" value="GET">
+    </div>
+
+    <script>
+    const root = document.getElementById("root");
+    console.dir(root)
+      var sellList = [
+        "url(1.jpeg)",
+        "url(2.jpeg)",
+        "url(3.jpeg)",
+        "url(4.jpeg)",
+        "url(5.jpeg)",
+        "url(6.jpeg)",
+        "url(7.jpeg)",
+        "url(8.jpeg)",
+        "url(9.jpeg)",
+        "url(10.jpeg)",
+        "url(11.jpeg)",
+        "url(12.jpg)",
+        "url(13.png)",
+        "url(14.jpg)",
+        "url(15.jpeg)",
+        "url(16.jpeg)",
+        "url(17.jpeg)",
+        "url(18.jpeg)",
+        "url(19.jpeg)",
+        "url(2.jpeg)",
+      ];
+
+      var sellListPrice = [
+        "2$",
+        "3$",
+        "5$",
+        "6$",
+        "5$",
+        "7$",
+        "6$",
+        "3$",
+        "5$",
+        "4$",
+        "6$",
+        "4$",
+        "9$",
+        "2$",
+        "4$",
+        "5$",
+        "6$",
+        "2$",
+        "4$",
+        "62$",
+      ];
+    
+      // ul 내 li 요소 sellList 길이만큼 생성
+      for(i = 0; i < sellListPrice.length; i++){
+      let li = document.createElement("li");
+        root.children[0].appendChild(li);
+        li.style.width = "11vw"
+        li.style.height = "11vw"
+        li.style.backgroundColor = "#fff0f589"
+        li.style.fontSize = "1rem"
+        li.style.margin = "0.3vw"
+        li.style.display = "flex"
+        li.style.flexDirection = "column"
+        li.style.flexWrap = "wrap"
+        li.style.alignItems = "center"
+        li.style.justifyContent = "center"
+        li.style.paddingTop = "0.5vh"
+    };
+
+    const ul = root.children[0]
+    console.dir(ul)
+
+    // sellList 클릭 시 색상 변경 이벤트 추가
+    ul.addEventListener('click', function(eventTarget){
+      eventTarget.target.style.backgroundColor = "#FFE4E1"
+    })
+
+    // sellList 이미지 li 내 첫번째 div에 대입
+    for(i = 0; i < sellListPrice.length; i++){
+       imoji = document.createElement("div");
+        root.children[0].children[i].appendChild(imoji);
+        let imojidiv = document.body.children[0].children[0].children[i]
+        imojidiv.children[0].style.backgroundImage = sellList[i]
+    }
+    // sellListPrice li 내 두번째 div에 대입  
+    for(i = 0; i < sellListPrice.length; i++){
+       price = document.createElement("div");
+        root.children[0].children[i].appendChild(price);
+        price.innerText = sellListPrice[i]
+    }
+    // sellList의 인덱스 li 내 세번째 div에 대입 
+    for(i = 0; i < sellListPrice.length; i++){
+       index = document.createElement("div");
+        root.children[0].children[i].appendChild(index);
+        index.innerText = i+1
+        index.style.position = "relative"
+        index.style.top = "5vh"
+        index.style.color = "rgb(74, 73, 73)"
+    }
+
+    // temp에 li 반복문을 통해 항목, 가격, 인덱스 값 대입
+    for (let i = 0; i < sellList.length; i++){
+      let li = root.children[0].children
+      li[i].addEventListener('click', function(){
+        temp = li[i].children[0].style.backgroundImage
+        tempTwo = parseInt(li[i].children[1].textContent)
+        tempThree = i+1
+      })
+     };
+
+    const button = document.getElementById("submit")
+
+    const money = document.getElementById("money")
+    console.log(money)
+
+    console.dir(ul.children[0].children[0])
+
+    // 초기화면에 버튼 클릭 시 다음 화면으로 전환 이벤트 추가
+    button.addEventListener('click', transition)
+    function transition(){
+      // 입력한 가격이 부족할 때 if문
+      if (money.value - tempTwo < 0){
+        let nomoney = document.createElement("div");
+        root.appendChild(nomoney)
+        console.dir(nomoney)
+        nomoney.style.width = "100vw"
+        nomoney.style.height = "100vh"
+        nomoney.style.backdropFilter = "blur(10px)"
+        nomoney.style.position = "absolute"
+        nomoney.style.fontSize = "4rem"
+        nomoney.style.display = "flex"
+        nomoney.style.alignItems = "center"
+        nomoney.style.justifyContent = "center"
+        nomoney.style.color = "rgb(74, 73, 73)"
+        nomoney.textContent = "MORE MONEY"
+      // 초기화면으로 돌아오기 위한 이벤트 추가
+      nomoney.addEventListener('click', removeTransition)
+      function removeTransition(){
+        nomoney.remove()
+        money.value = ""
+        for (i = 0; i < sellList.length; i++){
+        let li = root.children[0].children
+        li[i].style.backgroundColor = "#fff0f589"
+        }
+      }
+      // 입력한 돈이 영화가격이랑 같거나 클 때 다음화면으로 전환되는 if
+      } else if (money.value - tempTwo >= 0){
+        let got = document.createElement("div");
+        root.appendChild(got)
+        console.dir(got)
+        got.style.width = "100vw"
+        got.style.height = "100vh"
+        got.style.backdropFilter = "blur(15px)"
+        got.style.position = "absolute"
+        got.style.display = "flex"
+        got.style.flexDirection = "column"
+        got.style.fontSize = "4rem"
+        got.style.alignItems = "center"
+        got.style.justifyContent = "center"
+        got.style.color = "rgb(74, 73, 73)"
+
+        let gotImg = document.createElement("div");
+        got.appendChild(gotImg)
+        gotImg.style.backgroundImage = temp
+        gotImg.style.backgroundRepeat = "no-repeat"
+        gotImg.style.backgroundSize = "cover"
+        gotImg.style.width = "20vw"
+        gotImg.style.height = "40vh"
+        gotImg.style.textCombineUpright = " GOT"
+
+        let change = document.createElement("button");
+        got.appendChild(change)
+        change.style.width = "9vw"
+        change.style.height = "9vw"
+        change.style.borderRadius = "50%"
+        change.style.backgroundColor = "#FFE4E1"
+        change.style.border = "0"
+        change.style.marginTop = "2vh"
+        change.style.color = "gray"
+        change.textContent = "CHANGE"
+        // 잔돈 버튼 눌렀을 때 잔돈이 없으면 다음 화면으로 넘어가는 이벤트 추가
+        change.addEventListener('click', function(){
+          if(money.value - tempTwo === 0){
+          got.style.width = "100vw"
+          got.style.height = "100vh"
+          got.style.backdropFilter = "blur(10px)"
+          got.style.position = "absolute"
+          got.style.fontSize = "4rem"
+          got.style.display = "flex"
+          got.style.flexDirection = "column"
+          got.style.alignItems = "center"
+          got.style.justifyContent = "center"
+          got.textContent = "NO CHANGE"
+
+        const retry = document.createElement("button");
+        got.appendChild(retry)
+          retry.style.width = "9vw"
+          retry.style.height = "9vw"
+          retry.style.borderRadius = "50%"
+          retry.style.backgroundColor = "#FFE4E1"
+          retry.style.border = "0"
+          retry.style.marginTop = "2vh"
+          retry.textContent = "RETRY"
+        // 초기화면으로 돌아오는 이벤트
+          retry.addEventListener('click', removeTransition)
+          function removeTransition(){
+            got.remove()
+            money.value = ""
+            for (i = 0; i < sellList.length; i++){
+              let li = root.children[0].children
+              li[i].style.backgroundColor = "#fff0f589"
+            }
+          }
+        }
+      })
+        // 잔돈이 있을 때 다음 화면으로 넘어가는 이벤트 추가
+        change.addEventListener('click', function(){
+          if(money.value - tempTwo > 0){
+          got.style.width = "100vw"
+          got.style.height = "100vh"
+          got.style.backdropFilter = "blur(10px)"
+          got.style.position = "absolute"
+          got.style.fontSize = "4rem"
+          got.style.display = "flex"
+          got.style.flexDirection = "column"
+          got.style.alignItems = "center"
+          got.style.justifyContent = "center"
+          got.textContent = money.value - tempTwo + " $"
+
+          const retry = document.createElement("button");
+          got.appendChild(retry)
+            retry.style.width = "9vw"
+            retry.style.height = "9vw"
+            retry.style.borderRadius = "50%"
+            retry.style.backgroundColor = "#FFE4E1"
+            retry.style.border = "0"
+            retry.style.marginTop = "2vh"
+            retry.textContent = "RETRY"
+          // 초기화면으로 돌아오는 이벤트
+          retry.addEventListener('click', removeTransition)
+          function removeTransition(){
+            got.remove()
+            money.value = ""
+            for (i = 0; i < sellList.length; i++){
+              let li = root.children[0].children
+              li[i].style.backgroundColor = "#fff0f589"
+            }
+          }
+        }
+      })
+     }
+    };
+
+     </script>
+  </div>
+</body>
+</html>
